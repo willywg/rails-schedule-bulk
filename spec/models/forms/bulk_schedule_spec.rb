@@ -76,5 +76,42 @@ RSpec.describe Forms::BulkSchedule, type: :model do
       end
     end
   end
-end
 
+  describe "Callbacks" do
+    describe "#after_save" do
+      context "with no repeted schedule by day" do
+        it "creates new schedules" do
+          bulk_schedule = Forms::BulkSchedule.new({
+            start_at: '2020-12-13'.to_date,
+            end_at: '2020-12-26'.to_date,
+            days: {
+              '0' => ['10:30', '14:30'], # Sunday
+              '2' => ['14:15', '08:20']  # Tuesday
+            }
+          })
+
+          expect {
+            bulk_schedule.save
+          }.to change(Schedule, :count).by(8)
+        end
+      end
+
+      context "with repeted schedule by day" do
+        it "creates only uniq schedules" do
+          bulk_schedule = Forms::BulkSchedule.new({
+            start_at: '2020-12-13'.to_date,
+            end_at: '2020-12-26'.to_date,
+            days: {
+              '0' => ['10:30', '14:30', '14:30'], # Sunday
+              '2' => ['14:15', '08:20', '14:15']  # Tuesday
+            }
+          })
+
+          expect {
+            bulk_schedule.save
+          }.to change(Schedule, :count).by(8)
+        end
+      end
+    end
+  end
+end
