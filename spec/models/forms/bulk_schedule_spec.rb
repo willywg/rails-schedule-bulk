@@ -43,6 +43,38 @@ RSpec.describe Forms::BulkSchedule, type: :model do
       end
     end
 
+    describe "#validate_dates_end_after_start" do
+      before(:all) { @bulk_schedule = Forms::BulkSchedule.new }
+
+      context 'when end_at is before start_ar' do
+        it 'is invalid' do
+          @bulk_schedule.start_at = 3.days.from_now.to_date
+          @bulk_schedule.end_at = 2.days.from_now.to_date
+
+          @bulk_schedule.valid?
+
+          expect(@bulk_schedule.errors[:end_at]).to include('debe ser mayor a la fecha inicial')
+        end
+      end
+
+      context 'when end_at is after start_at' do 
+        it 'is valid' do
+          @bulk_schedule.start_at = 2.days.from_now.to_date
+          @bulk_schedule.end_at = 3.days.from_now.to_date
+
+          expect(@bulk_schedule).to be_valid
+        end
+      end
+
+      context 'when end_at is same to start_at' do
+        it 'is valid' do
+          @bulk_schedule.start_at = 2.days.from_now.to_date
+          @bulk_schedule.end_at = 2.days.from_now.to_date
+
+          expect(@bulk_schedule).to be_valid
+        end
+      end
+    end
   end
 end
 
