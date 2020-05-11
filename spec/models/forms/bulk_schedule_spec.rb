@@ -112,6 +112,24 @@ RSpec.describe Forms::BulkSchedule, type: :model do
           }.to change(Schedule, :count).by(8)
         end
       end
+
+      context "with some empty schedule by day" do
+        it "creates only not empty schedules" do
+          bulk_schedule = Forms::BulkSchedule.new({
+            start_at: '2020-12-13'.to_date,
+            end_at: '2020-12-26'.to_date,
+            days: {
+              '0' => ['10:30', '14:30', ''], # Sunday
+              '2' => ['14:15', '08:20', ''],  # Tuesday
+              '1' => ['', ''] # Monday
+            }
+          })
+
+          expect {
+            bulk_schedule.save
+          }.to change(Schedule, :count).by(8)
+        end
+      end
     end
   end
 end

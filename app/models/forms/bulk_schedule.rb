@@ -20,7 +20,7 @@ module Forms
 
     def bulk_schedules_from_days
       valid_week_days.each do |week_day, dates|
-        times_to_day = days[week_day].uniq # Uniq ensure not repeted times
+        times_to_day = days[week_day].uniq.reject(&:empty?) # Uniq ensure not repeted times, and don't accept empty
         
         times_to_day.each do |start_time|
           dates.each do |start_on|
