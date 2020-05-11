@@ -12,3 +12,6 @@
 - Creates databases to development and test: `rails db:create`
 - Install gems with `bundle install`
 - Install yarn packages with `yarn install`
+
+# Run Tests
+- Only need to run `rspec` to see model specs
