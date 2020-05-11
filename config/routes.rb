@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   
   root to: 'bulk_schedules#new'
 
-  resources :bulk_schedules
+  resource :bulk_schedule
 end

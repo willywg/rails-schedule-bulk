@@ -16,6 +16,12 @@ class BulkSchedulesController < ApplicationController
     # render plain: params.inspect
   end
 
+  def destroy
+    Schedule.destroy_all
+
+    redirect_to root_path, notice: 'Horarios eliminados con éxito!!!'
+  end
+
   private
     def bulk_schedule_params
       params.require(:bulk_schedule).permit(

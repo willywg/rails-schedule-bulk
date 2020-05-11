@@ -1,7 +1,7 @@
-<h1 class='title'>Programar Horarios</h1>
 
 <div class="columns">
   <div class="column is-8">
+    <h1 class='title'>Programar Horarios</h1>
     <%- if @bulk_schedule.errors.any? %>
       <div class="notification is-danger">
         <h4 class="subtitle is-4">Han ocurrido los siguientes errores</h4>
@@ -13,7 +13,7 @@
       </div>
     <% end %>
 
-    <%= form_with scope: :bulk_schedule, url: bulk_schedules_path, local: true do |f| %>
+    <%= form_with scope: :bulk_schedule, url: bulk_schedule_path, local: true do |f| %>
       <div class="field is-horizontal">
         <div class="field-label is-normal">
           <label class="label">Fechas</label>
@@ -98,6 +98,8 @@
         <% end %>
       </tbody>
     </table>
+
+    <%= link_to 'Eliminar todos los Horarios', bulk_schedule_path, method: :delete, data: { confirm: 'En verdad deseas eliminar todos los horarios?' }, class: 'button is-danger is-fullwidth' %>
     <% end %>
 
   </div>
