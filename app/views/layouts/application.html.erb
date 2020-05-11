@@ -13,6 +13,14 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+
+  <%- key_texts = { 'notice': 'is-success', 'alert': 'is-warning', 'error': 'is-danger' } %>
+  <%- flash.each do |key, value| %>
+    <div class="notification is-marginless is-radiusless <%= key_texts[key.to_sym] %>">
+      <%= value %>
+    </div>
+  <% end %>
+
   <section class="section">
     <div class="container">
       <%= yield %>

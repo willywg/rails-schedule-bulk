@@ -2,6 +2,17 @@
 
 <div class="columns">
   <div class="column is-8">
+    <%- if @bulk_schedule.errors.any? %>
+      <div class="notification is-danger">
+        <h4 class="subtitle is-4">Han ocurrido los siguientes errores</h4>
+        <ul>
+          <%- @bulk_schedule.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <%= form_with scope: :bulk_schedule, url: bulk_schedules_path, local: true do |f| %>
       <div class="field is-horizontal">
         <div class="field-label is-normal">
