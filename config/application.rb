@@ -32,6 +32,11 @@ module SchedulesTest
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    # I18n
+    config.i18n.available_locales = [:es, :en]
+    config.i18n.fallbacks = [:es, :en]
+    config.i18n.default_locale = :es
+
     # Don't generate system test files.
     config.generators.system_tests = nil
 

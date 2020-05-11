@@ -1,0 +1,15 @@
+es:
+  activerecord:
+    models:
+      schedule:
+        one: Horario
+        other: Horarios
+      forms/bulk_schedule: Horarios en Masa
+    attributes:
+      schedule:
+        start_on: Fecha
+        start_time: Hora
+      forms/bulk_schedule:
+        start_at: Fecha de Inicio
+        end_at: Fecha de finalización
+        days: Días
