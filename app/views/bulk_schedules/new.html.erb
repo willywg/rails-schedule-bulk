@@ -75,4 +75,31 @@
 
     <% end %>
   </div>
+  <div class="column is-4">
+    <%- if @schedules.present? %>
+    <h2 class='title'>Horarios Creados</h2>
+
+    <table class="table is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Día</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%- @schedules.each do |schedule| %>
+        <tr>
+          <td><%= schedule.start_on %></td>
+          <td><%= schedule.start_time_str %></td>
+          <td><%= schedule.weekday %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% end %>
+
+  </div>
 </div>
+

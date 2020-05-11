@@ -1,4 +1,6 @@
 class BulkSchedulesController < ApplicationController
+  before_action :load_schedules
+
   def new
     @bulk_schedule = Forms::BulkSchedule.new
   end
@@ -21,5 +23,9 @@ class BulkSchedulesController < ApplicationController
         :end_at,
         :days => {}
       )
+    end
+
+    def load_schedules
+      @schedules = Schedule.order(:start_on, :start_time)
     end
 end
