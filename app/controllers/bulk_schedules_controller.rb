@@ -13,7 +13,6 @@ class BulkSchedulesController < ApplicationController
     else
       render :new
     end
-    # render plain: params.inspect
   end
 
   def destroy
